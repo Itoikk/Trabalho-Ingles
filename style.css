@@ -1,0 +1,26 @@
+:root {
+    --bg-main: #b1e6d1;
+    --cor-3: #451a3e;
+    --cor-4: #270a33;
+    --bg-header:#3d7b80;
+    --font-color: black;
+
+}
+body{
+    background-color: var(--bg-main);
+}
+header{
+    background-color: var(--bg-header);
+}
+header a{
+    text-decoration: none;
+    color: var(--font-color);
+    font-weight: bold;
+}
+
+body.dark-theme{
+    --bg-header: #77b1a9;
+    --bg-main: #270a33;
+    --font-color: white;
+
+}
