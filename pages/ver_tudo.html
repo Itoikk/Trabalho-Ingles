@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos os Trabalhos</title>
+    <link href="https://jsdelivr.net" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link class="stylesheet" href="https://jsdelivr.net">
+    
+    <!-- Script do Supabase -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+    <header class="container my-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div><h1>😞</h1></div>
+            <nav>
+                <a href="../index.html" class="me-2">Página inicial</a>
+                <a href="envio.html" class="me-2">Enviar</a>
+                <a href="#">Ver all</a>
+            </nav>
+            <div>
+                <button class="btn btn-outline-secondary btn-sm">Login</button>
+                <button class="btn btn-primary btn-sm">Sign-up</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <h2 class="h4 mb-3">📋 Arquivos Compartilhados por Usuários</h2>
+        
+        <!-- É aqui que a lista de PDFs vai aparecer automaticamente -->
+        <div id="listaPDFs" class="list-group">
+            <div class="text-muted">Buscando PDFs na nuvem...</div>
+        </div>
+    </main>
+
+    <script>
+        // Lembre de usar EXATAMENTE as mesmas credenciais em ambas as páginas
+        const SUPABASE_URL = "SUA_URL_DA_API_AQUI";
+        const SUPABASE_KEY = "SUA_CHAVE_ANON_PUBLIC_AQUI";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function listarPDFs() {
+            const container = document.getElementById('listaPDFs');
+            const { data, error } = await supabase.storage.from('arquivos-pdf').list();
+
+            if (error || !data || data.length === 0) {
+                container.innerHTML = "<div class='alert alert-light text-muted'>Nenhum PDF cadastrado por enquanto.</div>";
+                return;
+            }
+
+            container.innerHTML = "";
+            data.forEach(arquivo => {
+                const { data: urlData } = supabase.storage.from('arquivos-pdf').getPublicUrl(arquivo.name);
+                
+                const item = document.createElement('div');
+                item.className = 'list-group-item d-flex justify-content-between align-items-center';
+                item.innerHTML = `
+                    <span><i class="bi bi-file-earmark-pdf text-danger me-2"></i>${arquivo.name}</span>
+                    <a href="${urlData.publicUrl}" target="_blank" class="btn btn-outline-primary btn-sm">Abrir PDF</a>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Executa a busca assim que a página de visualização é aberta
+        listarPDFs();
+    </script>
+</body>
+</html>
