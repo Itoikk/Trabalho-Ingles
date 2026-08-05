@@ -1,71 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todos os Trabalhos</title>
-    <link href="https://jsdelivr.net" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link class="stylesheet" href="https://jsdelivr.net">
-    
-    <!-- Script do Supabase -->
-    <script src="https://jsdelivr.net"></script>
+    <title>Ver todos os trabalhos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-    <header class="container my-3">
+    <header>
         <div class="d-flex justify-content-between align-items-center">
-            <div><h1>😞</h1></div>
+            <div>
+                <h1>😞</h1>
+            </div>
             <nav>
-                <a href="../index.html" class="me-2">Página inicial</a>
-                <a href="envio.html" class="me-2">Enviar</a>
-                <a href="#">Ver all</a>
+                <a href="../index.html">Página inicial</a>
+                <a href="envio.html">Enviar</a>
+                <a href="ver_tudo.html">Ver all</a>
             </nav>
             <div>
-                <button class="btn btn-outline-secondary btn-sm">Login</button>
-                <button class="btn btn-primary btn-sm">Sign-up</button>
+                <button>Login</button>
+                <button>Sign-up</button>
             </div>
         </div>
     </header>
 
-    <main class="container my-4">
-        <h2 class="h4 mb-3">📋 Arquivos Compartilhados por Usuários</h2>
-        
-        <!-- É aqui que a lista de PDFs vai aparecer automaticamente -->
-        <div id="listaPDFs" class="list-group">
-            <div class="text-muted">Buscando PDFs na nuvem...</div>
+    <div class="container mt-4">
+        <h2 class="mb-4">Trabalhos enviados</h2>
+
+        <!-- É aqui que a função listarPDFs() vai colocar os trabalhos -->
+        <div id="listaPDFs" class="row g-3">
+            <p>Carregando...</p>
         </div>
-    </main>
+    </div>
 
-    <script>
-        // Lembre de usar EXATAMENTE as mesmas credenciais em ambas as páginas
-        const SUPABASE_URL = "SUA_URL_DA_API_AQUI";
-        const SUPABASE_KEY = "SUA_CHAVE_ANON_PUBLIC_AQUI";
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        async function listarPDFs() {
-            const container = document.getElementById('listaPDFs');
-            const { data, error } = await supabase.storage.from('arquivos-pdf').list();
-
-            if (error || !data || data.length === 0) {
-                container.innerHTML = "<div class='alert alert-light text-muted'>Nenhum PDF cadastrado por enquanto.</div>";
-                return;
-            }
-
-            container.innerHTML = "";
-            data.forEach(arquivo => {
-                const { data: urlData } = supabase.storage.from('arquivos-pdf').getPublicUrl(arquivo.name);
-                
-                const item = document.createElement('div');
-                item.className = 'list-group-item d-flex justify-content-between align-items-center';
-                item.innerHTML = `
-                    <span><i class="bi bi-file-earmark-pdf text-danger me-2"></i>${arquivo.name}</span>
-                    <a href="${urlData.publicUrl}" target="_blank" class="btn btn-outline-primary btn-sm">Abrir PDF</a>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        // Executa a busca assim que a página de visualização é aberta
-        listarPDFs();
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../script.js"></script>
 </body>
+
 </html>
