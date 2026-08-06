@@ -1,26 +1,77 @@
 :root {
-    --bg-main: #b1e6d1;
-    --cor-3: #451a3e;
-    --cor-4: #270a33;
-    --bg-header:#3d7b80;
-    --font-color: black;
-
-}
-body{
-    background-color: var(--bg-main);
-}
-header{
-    background-color: var(--bg-header);
-}
-header a{
-    text-decoration: none;
-    color: var(--font-color);
-    font-weight: bold;
+  --bg-main: #dbdbdb;
+  --bg-header: #2b879e;
+  --font-color: #222222;
+  --btn-bg: #3ec9a7;
 }
 
-body.dark-theme{
-    --bg-header: #77b1a9;
-    --bg-main: #270a33;
-    --font-color: white;
 
+body {
+  background-color: var(--bg-main);
+  color: var(--font-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+
+header {
+  background-color: var(--bg-header);
+  color: #ffffff;
+  padding: 15px 30px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+
+header nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 12px;
+  transition: opacity 0.2s;
+}
+
+header nav a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+
+.btn-login {
+  background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-signup {
+  background-color: var(--btn-bg);
+  border: none;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-login:hover, .btn-signup:hover {
+  opacity: 0.9;
+}
+
+
+main {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+

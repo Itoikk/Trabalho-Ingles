@@ -100,3 +100,5 @@ async function listarPDFs() {
 // Chama a listagem automaticamente quando a página carrega
 // (não dá problema chamar em toda página, porque a função já checa se a div existe)
 listarPDFs();
+
+
