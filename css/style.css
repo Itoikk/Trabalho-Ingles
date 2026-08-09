@@ -1,123 +1,150 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
-  --bg-main: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-header: #1e293b;
-  --primary: #0284c7;
-  --primary-hover: #0369a1;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --bg-main: #99b0cc91;
+    --bg-header: #2b879e;
+    --bg-header-botao:#4695a8b2;
+    --font-color: #222222;
+    --btn-bg: #3ec9a7;
+    --cor-p:#555555;
+    --branco: #ffffff;
 }
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  margin: 0;
-  padding: 0;
+    background-color: var(--bg-main);
+    color: var(--font-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Header */
 header {
-  background-color: var(--bg-header);
-  color: #ffffff;
-  padding: 1rem 2rem;
-  box-shadow: var(--shadow-sm);
+    background-color: var(--bg-header);
+    color: var(--branco);
+    padding: 20px 0;
 }
 
 header h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  margin: 0;
+    font-size: 1.8rem;
+    margin: 0;
 }
 
 header nav a {
-  color: #cbd5e1;
-  text-decoration: none;
-  font-weight: 500;
-  margin: 0 12px;
-  transition: color 0.2s ease;
+    color: var(--branco);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 header nav a:hover {
-  color: #ffffff;
+    text-decoration: underline;
 }
 
-/* Botões do Header */
-.btn-login {
-  background: transparent;
-  border: 1px solid #475569;
-  color: #ffffff;
-  padding: 6px 16px;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+.botao_do_nav{
+    background-color: var(--bg-header-botao);
+    color: var(--branco);
+    border-radius: 5px;
 }
 
-.btn-login:hover {
-  background: #334155;
-  border-color: #334155;
+.inicio {
+    text-align: center;
+    padding: 80px 20px;
 }
 
-.btn-signup {
-  background-color: var(--primary);
-  border: none;
-  color: #ffffff;
-  padding: 6px 16px;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+
+.inicio h2 {
+    font-size: 45px;
+    margin-bottom: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.btn-signup:hover {
-  background-color: var(--primary-hover);
+
+.inicio p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: var(--cor-p);
 }
 
-/* Estilo para Cards de Trabalhos (Na página de listar) */
-.card-trabalho {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.trabalhos {
+    padding: 60px 20px;
 }
 
-.card-trabalho:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.trabalhos h2 {
+    font-size: 45px;
+    margin-bottom: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/* Modal Ajustado */
-.modal-content {
-  border-radius: 12px;
-  border: none;
-  box-shadow: var(--shadow-md);
+
+.trabalhos h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: var(--bg-header);
 }
 
-.modal-header {
-  border-bottom: 1px solid var(--border-color);
+.botao_top3 {
+    background-color: var(--bg-header);
+    color: var(--branco);
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
-.modal-footer {
-  border-top: 1px solid var(--border-color);
+.card {
+    margin-bottom: 30px;
+    border: none;
+    box-shadow: 0 2px 8px #00000020;
 }
 
-/* Estilização básica de inputs dentro dos modais/formulários */
-input[type="text"],
-input[type="file"] {
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 8px 12px;
-  width: 65%;
-  outline: none;
+
+.card img {
+    height: 200px;
+    object-fit: cover;
 }
 
-input[type="text"]:focus {
-  border-color: var(--primary);
+
+.card-title {
+    font-size: 22px;
 }
+
+
+.card-text {
+    color: var(--cor-p);
+}
+
+.fundinho_beneficio {
+    background-color: var(--branco);
+    border-radius: 10px;
+    min-height: 180px;
+    padding: 30px 20px;
+    height: 100%;
+}
+
+.beneficio {
+    text-align: center;
+}
+
+.beneficio h3 {
+    color: var(--bg-header);
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.beneficio p {
+    color: var(--cor-p);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+footer {
+    background-color: var(--bg-header);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
