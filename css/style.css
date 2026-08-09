@@ -1,77 +1,123 @@
-:root {
-  --bg-main: #dbdbdb;
-  --bg-header: #2b879e;
-  --font-color: #222222;
-  --btn-bg: #3ec9a7;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-header: #1e293b;
+  --primary: #0284c7;
+  --primary-hover: #0369a1;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
 body {
   background-color: var(--bg-main);
-  color: var(--font-color);
-  font-family: Arial, sans-serif;
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-
+/* Header */
 header {
   background-color: var(--bg-header);
   color: #ffffff;
-  padding: 15px 30px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-sm);
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
-
 header nav a {
-  color: #ffffff;
+  color: #cbd5e1;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
   margin: 0 12px;
-  transition: opacity 0.2s;
+  transition: color 0.2s ease;
 }
 
 header nav a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
+  color: #ffffff;
 }
 
-
+/* Botões do Header */
 .btn-login {
   background: transparent;
-  border: 2px solid #ffffff;
+  border: 1px solid #475569;
   color: #ffffff;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-login:hover {
+  background: #334155;
+  border-color: #334155;
 }
 
 .btn-signup {
-  background-color: var(--btn-bg);
+  background-color: var(--primary);
   border: none;
   color: #ffffff;
-  padding: 8px 16px;
+  padding: 6px 16px;
   border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 
-.btn-login:hover, .btn-signup:hover {
-  opacity: 0.9;
+.btn-signup:hover {
+  background-color: var(--primary-hover);
 }
 
-
-main {
-  text-align: center;
-  margin-top: 50px;
-  padding: 20px;
+/* Estilo para Cards de Trabalhos (Na página de listar) */
+.card-trabalho {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.card-trabalho:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
 
+/* Modal Ajustado */
+.modal-content {
+  border-radius: 12px;
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+/* Estilização básica de inputs dentro dos modais/formulários */
+input[type="text"],
+input[type="file"] {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 65%;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary);
+}
