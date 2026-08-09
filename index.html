@@ -2,45 +2,135 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Inicial</title>
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>English Games</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/headers.css">
 </head>
 
 <body>
-
-  <header>
-    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
-      <h1 class="m-0">Inglês</h1>
-
-      <nav>
-        <a href="index.html">Página inicial</a>
-        <a href="pages/envio.html">Enviar</a>
-        <a href="pages/ver_tudo.html">Ver todos</a>
-      </nav>
-
-      <div class="d-flex gap-2">
-        <button class="btn-login">Login</button>
-        <button class="btn-signup">Sign-up</button>
-      </div>
-    </div>
-  </header>
-
-  <main class="container my-5 py-5 text-center">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <h2 class="display-5 fw-bold mb-3">Plataforma de Trabalhos de Inglês</h2>
-        <p class="lead text-muted mb-4">Envie seus arquivos PDF, consulte os trabalhos de outros alunos e compartilhe conhecimento em um só lugar.</p>
-        <div class="d-flex justify-content-center gap-3">
-          <a href="pages/envio.html" class="btn btn-primary btn-lg px-4">Enviar Trabalho</a>
-          <a href="pages/ver_tudo.html" class="btn btn-outline-secondary btn-lg px-4">Ver Lista</a>
+    <header>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1>Inglês</h1>
+            </div>
+            <nav>
+                <a href="../index.html">Página inicial</a>
+                <a href="pages/envio.html">Enviar</a>
+                <a href="pages/ver_tudo.html">Ver all</a>
+            </nav>
+            <div class="d-flex gap-2">
+                <button class="btn-login botao_do_nav" >Login</button>
+                <button class="btn-signup botao_do_nav">Sign-up</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </main>
+    </header>
 
+    <main>
+
+        <section class="inicio">
+            <div class="container">
+                <h2>Aprender pode ser divertido!</h2>
+                <p>Este site reúne os trabalhos desenvolvidos pelos alunos do 2º ano na disciplina de Inglês. Os projetos apresentam jogos e atividades que podem ajudar no processo de aprendizagem.</p>
+                <p>Conheça os trabalhos desenvolvidos pelos alunosdo 2º ano sobre jogos e educação.</p>
+            </div>
+        </section>
+
+        <section class="trabalhos">
+            <div class="container">
+                <h2>Trabalhos em destaque</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/capa.jpeg" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">nome do 2 melhor projeto</h3>
+                                <p class="card-text">descrição do projeto</p>
+                                <a href="" class="btn btn botao_top3">Ver trabalho</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/joguinho.jpeg" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">nome do 1 melhor projeto</h3>
+                                <p class="card-text"> descrição do projeto</p>
+                                <a href="" class="btn btn botao_top3">Ver trabalho</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/capa.jpeg" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h3 class="card-title">nome do 3 melhor projeto</h3>
+                                <p class="card-text">descrição do projeto</p>
+                                <a href="" class="btn btn botao_top3">Ver trabalho</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="beneficios">
+    <div class="container">
+
+        <h2 style="font-family: Georgia, 'Times New Roman', Times, serif;font-size: 45px;margin-bottom: 20px;">Jogos na educação</h2>
+
+        <div class="row g-2">
+
+            <div class="col-md-3">
+                <div class="fundinho_beneficio">
+                    <div class="beneficio">
+                        <h3>Aprendizagem</h3>
+                        <p> Os jogos podem ajudar os alunos a aprender novos conteúdos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="fundinho_beneficio">
+                    <div class="beneficio">
+                        <h3>Interação</h3>
+                        <p>As atividades podem tornar as aulas mais interativas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="fundinho_beneficio">
+                    <div class="beneficio">
+                        <h3>Criatividade</h3>
+                        <p>Os alunos podem desenvolver novas ideias através dos jogos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="fundinho_beneficio">
+                    <div class="beneficio">
+                        <h3>Equipe</h3>
+                        <p>Alguns jogos também incentivam o trabalho em equipe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+    </main>
+
+    <footer>
+        <p>Projeto de Inglês - 2º Ano de Informática - 2026</p>
+    </footer>
 </body>
+
 </html>
