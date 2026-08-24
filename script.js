@@ -6,6 +6,15 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 // senão dá erro de usar o nome antes dele existir.
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// ---------- Remove acentos, espaços e caracteres especiais do nome do arquivo ----------
+// A Supabase só aceita letras, números, ponto, traço e underline na "key" do storage.
+function sanitizarNome(nome) {
+  return nome
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos (ó, ã, ç, etc)
+    .replace(/[^a-zA-Z0-9.\-_]/g, "_")                  // troca espaço, °, —, (), etc por _
+    .replace(/_+/g, "_");                               // colapsa vários _ seguidos em um só
+}
+
 // ---------- Enviar um novo trabalho (arquivo + informações) ----------
 async function enviarPDF() {
   const nome = document.getElementById('nome-trabalho').value;
@@ -19,7 +28,7 @@ async function enviarPDF() {
   }
 
   const arquivo = input.files[0];
-  const nomeUnico = Date.now() + "_" + arquivo.name; // evita nomes repetidos
+  const nomeUnico = Date.now() + "_" + sanitizarNome(arquivo.name); // evita nomes repetidos e caracteres inválidos
 
   // 1. Envia o PDF em si pro "Storage" (o espaço de arquivos do Supabase)
   const { error: erroUpload } = await supabaseClient
@@ -100,5 +109,3 @@ async function listarPDFs() {
 // Chama a listagem automaticamente quando a página carrega
 // (não dá problema chamar em toda página, porque a função já checa se a div existe)
 listarPDFs();
-
-
