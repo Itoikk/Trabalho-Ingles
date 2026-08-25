@@ -4,48 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enviar Trabalho</title>
-    
+
+    <title>Enviar Trabalho | English Games</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/headers.css">
 </head>
 
 <body>
-
     <header>
-        <div class="container-fluid d-flex justify-content-between align-items-center p-0">
-            <h1 class="m-0">Inglês</h1>
-
-            <nav>
-                <a href="../index.html">Página inicial</a>
-                <a href="envio.html" class="active">Enviar</a>
-                <a href="ver_tudo.html">Ver todos</a>
-            </nav>
-
-            <div class="d-flex gap-2">
-                <button class="btn-login">Login</button>
-                <button class="btn-signup">Sign-up</button>
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" aria-controls="menuLateral">
+                &#9776;
+            </button>
+            <div>
+                <h1>Inglês</h1>
+            </div>
+            <div class="d-flex gap-2" id="area-auth">
+                <a href="/pages/login.html"><button class="btn-login botao_do_nav">Login</button></a>
+            </div>
+            <div class="d-flex gap-2 d-none" id="area-logado">
+                <a href="/pages/admin.html" id="link-admin" class="d-none"><button class="botao_do_nav">Área Admin</button></a>
+                <a href="/pages/perfil.html"><button class="botao_do_nav">Meu perfil</button></a>
+                <button class="botao_do_nav" onclick="sair()">Sair</button>
             </div>
         </div>
     </header>
 
-    <main class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                
-                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
-                    
-                    <div class="text-center mb-4">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3" style="width: 60px; height: 60px;">
-                            <i class="bi bi-cloud-arrow-up-fill fs-3"></i>
-                        </div>
-                        <h2 class="fw-bold m-0">Enviar Trabalho</h2>
-                        <p class="text-muted mt-2">Preencha as informações abaixo e envie seu arquivo em formato PDF.</p>
-                    </div>
+    <!-- Menu lateral (offcanvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="menuLateralLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="d-flex flex-column gap-2">
+                <a href="/index.html">Página inicial</a>
+                <a href="/pages/envio.html">Enviar</a>
+                <a href="/pages/ver_tudo.html">Ver all</a>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <div class="container" style="max-width: 600px;">
+            <div class="card shadow-sm my-4">
+                <div class="card-body p-4">
+                    <h2 class="mb-4">Enviar Trabalho</h2>
 
                     <form id="formUpload" onsubmit="event.preventDefault(); enviarPDF();">
-                        
+
                         <div class="mb-3">
                             <label for="nome-trabalho" class="form-label fw-semibold">Título do Trabalho</label>
                             <input type="text" class="form-control form-control-lg fs-6" id="nome-trabalho" placeholder="Ex: Super Mario Bross" required>
@@ -67,22 +78,25 @@
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg fw-bold d-flex align-items-center justify-content-center gap-2">
+                            <button type="submit" id="btn-enviar" class="btn btn-primary btn-lg fw-bold d-flex align-items-center justify-content-center gap-2">
                                 <i class="bi bi-send-fill"></i> Enviar Arquivo
                             </button>
                         </div>
 
                     </form>
-
                 </div>
-
             </div>
         </div>
     </main>
 
+    <footer>
+        <p>Projeto de Inglês - 2º Ano de Informática - 2026</p>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../script.js"></script>
+    <script src="/js/header.js"></script>
+    <script src="/js/envio.js"></script>
 </body>
 
 </html>

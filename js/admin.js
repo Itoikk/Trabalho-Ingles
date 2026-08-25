@@ -1,23 +1,65 @@
-// ======================================================
-// DADOS MOCK — trocar depois pelas chamadas reais do Supabase
-// ======================================================
-let gruposMock = [
-    { id: 1, nome: "Grupo A", codigo: "GRP-A3F9", membros: 3 },
-    { id: 2, nome: "Grupo B", codigo: "GRP-X7K2", membros: 4 },
-    { id: 3, nome: "Grupo C", codigo: "GRP-M1Q8", membros: 2 }
-];
-
-const perfilFakeAdmin = { is_admin: true }; // MOCK — depois vem da tabela 'perfis'
+// --- Configuração do Supabase ---
+const SUPABASE_URL = "https://caajxkxpvlleiilwayzi.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhYWp4a3hwdmxsZWlpbHdheXppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NjE3NTksImV4cCI6MjEwMTUzNzc1OX0.vYboyaDIsNonsZ1kiTRGiKzIesrJOz6WLcIpEffZjXU";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ======================================================
-// Verificação de acesso admin
+// Grupos carregados do Supabase (preenchido por carregarGrupos)
 // ======================================================
-function verificarAdmin() {
-    // Depois: const { data } = await supabase.from('perfis').select('is_admin').eq('id', user.id).single();
-    if (!perfilFakeAdmin.is_admin) {
+let gruposMock = [];
+
+// ======================================================
+// Busca os grupos reais e conta os membros de cada um
+// ======================================================
+async function carregarGrupos() {
+    const { data: grupos, error } = await supabaseClient
+        .from('grupos')
+        .select('id, nome, codigo')
+        .order('criado_em', { ascending: false });
+
+    if (error) {
+        mostrarMsg("Erro ao carregar grupos: " + error.message);
+        return;
+    }
+
+    // Pra cada grupo, conta quantas linhas existem em membros_grupo
+    const gruposComContagem = await Promise.all(
+        grupos.map(async (g) => {
+            const { count } = await supabaseClient
+                .from('membros_grupo')
+                .select('*', { count: 'exact', head: true })
+                .eq('grupo_id', g.id);
+
+            return { ...g, membros: count ?? 0 };
+        })
+    );
+
+    gruposMock = gruposComContagem;
+    renderizarGrupos(gruposMock);
+}
+
+// ======================================================
+// Verificação de acesso admin (agora real, via Supabase)
+// ======================================================
+async function verificarAdmin() {
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        window.location.href = "login.html";
+        return false;
+    }
+
+    const { data } = await supabaseClient
+        .from('perfis')
+        .select('is_admin')
+        .eq('id', user.id)
+        .single();
+
+    if (!data?.is_admin) {
         window.location.href = "index.html";
         return false;
     }
+
     return true;
 }
 
@@ -38,8 +80,8 @@ function renderizarGrupos(grupos) {
           <td><code>${g.codigo}</code></td>
           <td>${g.membros}</td>
           <td class="text-end">
-            <button class="btn btn-sm btn-outline-secondary" onclick="abrirEdicao(${g.id})">Editar</button>
-            <button class="btn btn-sm btn-outline-danger" onclick="excluirGrupo(${g.id})">Excluir</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="abrirEdicao('${g.id}')">Editar</button>
+            <button class="btn btn-sm btn-outline-danger" onclick="excluirGrupo('${g.id}')">Excluir</button>
           </td>
         </tr>
       `).join("");
@@ -48,21 +90,24 @@ function renderizarGrupos(grupos) {
 // ======================================================
 // Ações: criar / editar / excluir
 // ======================================================
-function abrirModalNovoGrupo() {
+async function abrirModalNovoGrupo() {
     const nome = prompt("Nome do novo grupo:");
     if (!nome) return;
 
-    const novoGrupo = {
-        id: Date.now(),
-        nome: nome,
-        codigo: "GRP-" + Math.random().toString(36).substring(2, 7).toUpperCase(),
-        membros: 0
-    };
+    const { data: { user } } = await supabaseClient.auth.getUser();
+    const codigo = "GRP-" + Math.random().toString(36).substring(2, 7).toUpperCase();
 
-    // Depois: await supabase.from('grupos').insert(novoGrupo)
-    gruposMock.push(novoGrupo);
-    renderizarGrupos(gruposMock);
+    const { error } = await supabaseClient
+        .from('grupos')
+        .insert({ nome, codigo, criado_por: user.id });
+
+    if (error) {
+        mostrarMsg("Erro ao criar grupo: " + error.message);
+        return;
+    }
+
     mostrarMsg("Grupo criado com sucesso.", "success");
+    carregarGrupos();
 }
 
 function abrirEdicao(id) {
@@ -76,28 +121,40 @@ function abrirEdicao(id) {
     modal.show();
 }
 
-function salvarEdicao() {
-    const id = Number(document.getElementById("edit-id").value);
+async function salvarEdicao() {
+    const id = document.getElementById("edit-id").value;
     const novoNome = document.getElementById("edit-nome").value;
 
-    const grupo = gruposMock.find(g => g.id === id);
-    if (grupo) {
-        // Depois: await supabase.from('grupos').update({ nome: novoNome }).eq('id', id)
-        grupo.nome = novoNome;
-        renderizarGrupos(gruposMock);
+    const { error } = await supabaseClient
+        .from('grupos')
+        .update({ nome: novoNome })
+        .eq('id', id);
+
+    if (error) {
+        mostrarMsg("Erro ao atualizar grupo: " + error.message);
+    } else {
         mostrarMsg("Grupo atualizado.", "success");
+        carregarGrupos();
     }
 
     bootstrap.Modal.getInstance(document.getElementById("modalEditar")).hide();
 }
 
-function excluirGrupo(id) {
+async function excluirGrupo(id) {
     if (!confirm("Tem certeza que deseja excluir esse grupo? Essa ação não pode ser desfeita.")) return;
 
-    // Depois: await supabase.from('grupos').delete().eq('id', id)
-    gruposMock = gruposMock.filter(g => g.id !== id);
-    renderizarGrupos(gruposMock);
+    const { error } = await supabaseClient
+        .from('grupos')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        mostrarMsg("Erro ao excluir grupo: " + error.message);
+        return;
+    }
+
     mostrarMsg("Grupo excluído.", "success");
+    carregarGrupos();
 }
 
 function mostrarMsg(texto, tipo = "danger") {
@@ -107,14 +164,16 @@ function mostrarMsg(texto, tipo = "danger") {
     setTimeout(() => msg.classList.add("d-none"), 3000);
 }
 
-function sair() {
-    // Depois: await supabase.auth.signOut()
+async function sair() {
+    await supabaseClient.auth.signOut();
     window.location.href = "login.html";
 }
 
 // ======================================================
 // Início
 // ======================================================
-if (verificarAdmin()) {
-    renderizarGrupos(gruposMock);
-}
+verificarAdmin().then((ehAdmin) => {
+    if (ehAdmin) {
+        carregarGrupos();
+    }
+});
