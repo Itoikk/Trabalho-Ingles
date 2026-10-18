@@ -52,5 +52,5 @@ document.getElementById("form-cadastro").addEventListener("submit", async (e) =>
     return;
   }
 
-  mostrarMsg("Account created successfully! Please check your email to verify your account before logging in.", "success");
+  mostrarMsg("Account created successfully!", "success");
 });
