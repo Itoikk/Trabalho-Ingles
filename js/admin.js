@@ -91,7 +91,7 @@ function renderizarGrupos(grupos) {
 // Ações: criar / editar / excluir
 // ======================================================
 async function abrirModalNovoGrupo() {
-    const nome = prompt("Nome do novo grupo:");
+    const nome = prompt("Name of the new group: ");
     if (!nome) return;
 
     const { data: { user } } = await supabaseClient.auth.getUser();
@@ -102,11 +102,11 @@ async function abrirModalNovoGrupo() {
         .insert({ nome, codigo, criado_por: user.id });
 
     if (error) {
-        mostrarMsg("Erro ao criar grupo: " + error.message);
+        mostrarMsg("Error creating group:" + error.message);
         return;
     }
 
-    mostrarMsg("Grupo criado com sucesso.", "success");
+    mostrarMsg("Group created successfully.", "success");
     carregarGrupos();
 }
 
@@ -131,9 +131,9 @@ async function salvarEdicao() {
         .eq('id', id);
 
     if (error) {
-        mostrarMsg("Erro ao atualizar grupo: " + error.message);
+        mostrarMsg("Error updating group: " + error.message);
     } else {
-        mostrarMsg("Grupo atualizado.", "success");
+        mostrarMsg("Group updated.", "success");
         carregarGrupos();
     }
 
@@ -141,7 +141,7 @@ async function salvarEdicao() {
 }
 
 async function excluirGrupo(id) {
-    if (!confirm("Tem certeza que deseja excluir esse grupo? Essa ação não pode ser desfeita.")) return;
+    if (!confirm("Are you sure you want to delete this group? This action cannot be undone.")) return;
 
     const { error } = await supabaseClient
         .from('grupos')
@@ -149,11 +149,11 @@ async function excluirGrupo(id) {
         .eq('id', id);
 
     if (error) {
-        mostrarMsg("Erro ao excluir grupo: " + error.message);
+        mostrarMsg("Error deleting group:" + error.message);
         return;
     }
 
-    mostrarMsg("Grupo excluído.", "success");
+    mostrarMsg("Group excluded.", "success");
     carregarGrupos();
 }
 
