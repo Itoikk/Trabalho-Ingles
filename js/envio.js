@@ -22,7 +22,7 @@ async function enviarPDF() {
     const input = document.getElementById('arquivo-trabalho');
 
     if (input.files.length === 0) {
-      alert("Selecione um arquivo PDF primeiro!");
+      alert("Select a PDF file first!");
       return;
     }
 
@@ -30,7 +30,7 @@ async function enviarPDF() {
     const { data: { user } } = await supabaseClient.auth.getUser();
 
     if (!user) {
-      alert("Você precisa estar logado para enviar um trabalho.");
+      alert("You need to be logged in to submit a piece of work.");
       window.location.href = "/pages/login.html";
       return;
     }
@@ -42,7 +42,7 @@ async function enviarPDF() {
       .maybeSingle();
 
     if (erroMembro || !membro) {
-      alert("Você precisa fazer parte de um grupo antes de enviar um trabalho. Vá em 'Meu perfil' e entre em um grupo com o código.");
+      alert("You need to be part of a group before you can submit an assignment. Go to 'My profile' and join a group using the code.");
       return;
     }
 
@@ -126,7 +126,7 @@ async function listarPDFs() {
     .order('created_at', { ascending: false });
 
   if (error || !data || data.length === 0) {
-    container.innerHTML = "<p>Nenhum PDF enviado ainda.</p>";
+    container.innerHTML = "<p>No PDF uploaded yet.</p>";
     return;
   }
 
@@ -161,7 +161,7 @@ async function listarPDFs() {
 
 // ---------- Excluir um trabalho (arquivo do Storage + linha da tabela) ----------
 async function excluirTrabalho(id, arquivoUrl) {
-  if (!confirm("Tem certeza que deseja excluir esse trabalho? Essa ação não pode ser desfeita.")) return;
+  if (!confirm("Are you sure you want to delete this work? This action cannot be undone.")) return;
 
   // Extrai o nome do arquivo a partir da URL pública, pra apagar do Storage também
   const nomeArquivo = decodeURIComponent(arquivoUrl.split('/arquivos-pdf/')[1]);
@@ -172,7 +172,7 @@ async function excluirTrabalho(id, arquivoUrl) {
     .remove([nomeArquivo]);
 
   if (erroStorage) {
-    alert("Erro ao excluir o arquivo: " + erroStorage.message);
+    alert("Error deleting the file: " + erroStorage.message);
     return;
   }
 
@@ -186,7 +186,7 @@ async function excluirTrabalho(id, arquivoUrl) {
     return;
   }
 
-  alert("Trabalho excluído com sucesso.");
+  alert("Work successfully deleted.");
   listarPDFs();
 }
 
