@@ -22,7 +22,7 @@ document.getElementById("form-login").addEventListener("submit", async (e) => {
   });
 
   if (error) {
-    mostrarMsg("E-mail ou senha inválidos.");
+    mostrarMsg("Invalid email or password.");
     return;
   }
 
@@ -38,7 +38,7 @@ document.getElementById("form-cadastro").addEventListener("submit", async (e) =>
   const confirma = document.getElementById("cadastro-confirma").value;
 
   if (senha !== confirma) {
-    mostrarMsg("As senhas não coincidem.");
+    mostrarMsg("The passwords do not match.");
     return;
   }
 
