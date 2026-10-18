@@ -34,6 +34,13 @@ header nav a {
     font-weight: bold;
 }
 
+a {
+    color: var(--font-color);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
 header nav a:hover {
     text-decoration: underline;
 }
@@ -144,7 +151,20 @@ footer {
     padding: 20px;
 }
 
+.rodape {
+    background-color: var(--bg-header);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+
 footer p {
     margin: 0;
 }
-
