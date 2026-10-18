@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Enviar Trabalho | English Games</title>
+    <title>Submit Assignment | English Games</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -21,15 +21,15 @@
                 &#9776;
             </button>
             <div>
-                <h1>Inglês</h1>
+                <h1>English Games</h1>
             </div>
             <div class="d-flex gap-2" id="area-auth">
                 <a href="login.html"><button class="btn-login botao_do_nav">Login</button></a>
             </div>
             <div class="d-flex gap-2 d-none" id="area-logado">
-                <a href="admin.html" id="link-admin" class="d-none"><button class="botao_do_nav">Área Admin</button></a>
-                <a href="perfil.html"><button class="botao_do_nav">Meu perfil</button></a>
-                <button class="botao_do_nav" onclick="sair()">Sair</button>
+                <a href="admin.html" id="link-admin" class="d-none"><button class="botao_do_nav">Admin Area</button></a>
+                <a href="perfil.html"><button class="botao_do_nav">My Profile</button></a>
+                <button class="botao_do_nav" onclick="sair()">Logout</button>
             </div>
         </div>
     </header>
@@ -42,44 +42,44 @@
         </div>
         <div class="offcanvas-body">
             <nav class="d-flex flex-column gap-2">
-                <a href="../index.html">Página inicial</a>
-                <a href="envio.html">Enviar</a>
-                <a href="ver_tudo.html">Ver all</a>
+                <a href="../index.html">Home</a>
+                <a href="envio.html">Submit</a>
+                <a href="ver_tudo.html">View All</a>
             </nav>
         </div>
     </div>
 
-    <main>
-        <div class="container" style="max-width: 600px;">
-            <div class="card shadow-sm my-4">
+    <main style="padding: 90px;">
+        <div class="container" style="max-width: 600px;" >
+            <div class="card shadow-sm my-4 ">
                 <div class="card-body p-4">
-                    <h2 class="mb-4">Enviar Trabalho</h2>
+                    <h2 class="mb-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">Submit Assignment</h2>
 
                     <form id="formUpload" onsubmit="event.preventDefault(); enviarPDF();">
 
                         <div class="mb-3">
-                            <label for="nome-trabalho" class="form-label fw-semibold">Título do Trabalho</label>
+                            <label for="nome-trabalho" class="form-label fw-semibold">Title</label>
                             <input type="text" class="form-control form-control-lg fs-6" id="nome-trabalho" placeholder="Ex: Super Mario Bross" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="descricao-trabalho" class="form-label fw-semibold">Descrição</label>
+                            <label for="descricao-trabalho" class="form-label fw-semibold">Description</label>
                             <textarea class="form-control" id="descricao-trabalho" rows="3" placeholder="Resuma brevemente o tema do trabalho..."></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="colaboradores-trabalho" class="form-label fw-semibold">Colaboradores / Autores</label>
+                            <label for="colaboradores-trabalho" class="form-label fw-semibold">Collaborators / Authors</label>
                             <input type="text" class="form-control" id="colaboradores-trabalho" placeholder="Ex: Maria Silva, João Santos">
                         </div>
 
                         <div class="mb-4">
-                            <label for="arquivo-trabalho" class="form-label fw-semibold">Arquivo (Apenas PDF)</label>
+                            <label for="arquivo-trabalho" class="form-label fw-semibold">File (PDF only)</label>
                             <input type="file" class="form-control" id="arquivo-trabalho" accept="application/pdf" required>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" id="btn-enviar" class="btn btn-primary btn-lg fw-bold d-flex align-items-center justify-content-center gap-2">
-                                <i class="bi bi-send-fill"></i> Enviar Arquivo
+                            <button type="submit" id="btn-enviar" class="btn btn-primary btn-lg fw-bold d-flex align-items-center justify-content-center gap-2" style="background-color: #47a0b68f; border:0px;">
+                                <i class="bi bi-send-fill"></i> Submit File
                             </button>
                         </div>
 
@@ -89,8 +89,8 @@
         </div>
     </main>
 
-    <footer>
-        <p>Projeto de Inglês - 2º Ano de Informática - 2026</p>
+    <footer class="rodape">
+        <p>English Project - 2nd Year of Computer Science - 2026</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
