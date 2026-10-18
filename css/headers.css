@@ -13,3 +13,7 @@
 .dropdown-toggle:not(:focus) {
   outline: 0;
 }
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
